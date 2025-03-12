@@ -27,6 +27,10 @@ var lintCmd = &cobra.Command{
 	Long:  `Returns warnings or errors for dashboard which do not adhere to accepted standards`,
 	PreRun: func(cmd *cobra.Command, args []string) {
 		_ = viper.BindPFlags(cmd.PersistentFlags())
+		if len(args) == 0 {
+			cmd.Help()
+			os.Exit(0)
+		}
 	},
 	SilenceUsage: true,
 	Args:         cobra.RangeArgs(0, 1),
